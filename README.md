@@ -1,2 +1,4 @@
 # Web-App-Project
-Analysis of Car Aales Data
+Analysis of Car Sales Data
+
+NOTE: Ctrl + C to stop the streamlit app
