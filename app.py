@@ -1,20 +1,20 @@
-# importing libraries
+#importing libraries
 import streamlit as st 
 import pandas as pd
 import plotly.express as px
 
 car_df = pd.read_csv('P:/DevTools/Projects/Python/Web-App-Project/vehicles_us.csv') #read csv file
 
-st.title('Car Sales Data') # app title
-st.write('--This is a web app to visualize car sales data--') # description
+st.title('Car Sales Data') #app title
+st.write('--This is a web app to visualize car sales data--') #description
 
-st.header('Search a vehicle:') # header for searching a vehicle
+st.header('Search a vehicle:') #header for searching a vehicle
 
-ordered_models = sorted(car_df['model'].dropna().unique()) # Sort models alphabetically
-selected_model = st.selectbox('Please select a car brand', ordered_models) # select box for car brands
+ordered_models = sorted(car_df['model'].dropna().unique()) #sort models alphabetically
+selected_model = st.selectbox('Please select a car brand', ordered_models) #select box for car brands
 
 if selected_model:
-    # Show only years available for the selected model, sorted
+    #show only years available for the selected model
     years_for_model = car_df[car_df['model'] == selected_model]['model_year'].dropna().unique()
     years_for_model = sorted(years_for_model)
     search_car_1 = st.selectbox('Please select the year', years_for_model)
@@ -22,9 +22,9 @@ if selected_model:
     st.dataframe(filtered_table) # show df of selected model and year
 
 st.header("Explore Data Distributions") #header
-st.write("Select a histogram type to visualize different aspects of the car sales data.") # write message
+st.write("Select a histogram type to visualize different aspects of the car sales data.") #write message
 
-# options for the selectbox
+#options for the selectbox
 hist_options = ["Price Distribution for Selected Model",
                 "Odometer Distribution for Selected Model",
                 "Cars Sold by Model Year",
@@ -32,8 +32,8 @@ hist_options = ["Price Distribution for Selected Model",
                 "Price Distribution by Fuel Type",
                 "Distribution by Transmission Type"]
 
-hist_choice = st.selectbox("Choose histogram type", hist_options) # select box for histogram options
-hist_button = st.button('Create histogram') # press button to show histogram
+hist_choice = st.selectbox("Choose histogram type", hist_options) #select box for histogram options
+hist_button = st.button('Create histogram') #press button to show histogram
 
 if hist_button:
     if hist_choice == "Price Distribution for Selected Model":
@@ -47,7 +47,7 @@ if hist_button:
                           yaxis_title="Number of Cars",
                           font=dict(size=14),
                           title_font=dict(size=20),
-                          bargap=0.1
+                          bargap=0.1 #gap between bars
         )
         st.plotly_chart(fig, use_container_width=True)
     elif hist_choice == "Odometer Distribution for Selected Model":
@@ -61,7 +61,7 @@ if hist_button:
                           yaxis_title="Number of Cars",
                           font=dict(size=14),
                           title_font=dict(size=20),
-                          bargap=0.1
+                          bargap=0.1 #gap between bars
         )
         st.plotly_chart(fig, use_container_width=True)
     elif hist_choice == "Cars Sold by Model Year":
@@ -74,7 +74,7 @@ if hist_button:
                           yaxis_title="Number of Cars Sold",
                           font=dict(size=14),
                           title_font=dict(size=20),
-                          bargap=0.1
+                          bargap=0.1 #gap between bars
      )
         st.plotly_chart(fig, use_container_width=True)
     elif hist_choice == "Distribution by Condition":
@@ -87,7 +87,7 @@ if hist_button:
                           yaxis_title="Number of Cars",
                           font=dict(size=14),
                           title_font=dict(size=20),
-                          bargap=0.1
+                          bargap=0.1 #gap between bars
         )
         st.plotly_chart(fig, use_container_width=True)
     elif hist_choice == "Price Distribution by Fuel Type":
@@ -100,7 +100,7 @@ if hist_button:
                           yaxis_title="Number of Cars",
                           font=dict(size=14),
                           title_font=dict(size=20),
-                          bargap=0.1
+                          bargap=0.1 #gap between bars
         )
         st.plotly_chart(fig, use_container_width=True)
     elif hist_choice == "Distribution by Transmission Type":
@@ -113,25 +113,26 @@ if hist_button:
                           yaxis_title="Number of Cars",
                           font=dict(size=14),
                           title_font=dict(size=20),
-                          bargap=0.1
+                          bargap=0.1 #gap between bars
         )
         st.plotly_chart(fig, use_container_width=True)
 
-st.header("Explore Relationships Between Variables")
-st.write("Create a scatter plot to analyze relationships between car attributes.")
+st.header("Explore Relationships Between Variables") #header
+st.write("Create a scatter plot to analyze relationships between car attributes.") #write message
 
+#options for the selectbox
 x_options = ["model_year", "odometer", "price"]
 y_options = ["price", "odometer"]
-color_options = ["condition", "fuel", "transmission", "paint_color"]
+color_options = ["condition", "fuel", "transmission", "paint_color"] 
 
-x_axis = st.selectbox("Select X-axis", x_options, index=0)
-y_axis = st.selectbox("Select Y-axis", y_options, index=0)
-color_by = st.selectbox("Color by", color_options, index=0)
+x_axis = st.selectbox("Select X-axis", x_options, index=0) #select box for x-axis
+y_axis = st.selectbox("Select Y-axis", y_options, index=0) #select box for y-axis
+color_by = st.selectbox("Categorize by", color_options, index=0) #select box for "categorize by" option
 
-scatt_button = st.button('Create a scatter plot')
+scatt_button = st.button('Create a scatter plot') #press button to show scatter plot
 
 if scatt_button:
-    st.write(f'Scatter plot for model: {selected_model}')
+    st.write(f'Scatter plot for: {selected_model}')
     filtered_df = car_df[car_df['model'] == selected_model]
     fig = px.scatter(filtered_df,
                      x=x_axis,
@@ -139,11 +140,7 @@ if scatt_button:
                      color=color_by,
                      hover_data=["odometer", "fuel", "transmission"],
                      template="plotly_white",
-                     title=f"{y_axis.title()} vs {x_axis.title()} for {selected_model} (colored by {color_by})"
+                     title=f"{y_axis.title()} vs {x_axis.title()} for {selected_model} (Categorize by {color_by})"
     )
     fig.update_layout(font=dict(size=14), title_font=dict(size=20))
-    st.plotly_chart(fig, use_container_width=True)
-
-# NOTES:
-# Running the app: streamlit run app.py
-# Ctrl + C to stop the app
+    st.plotly_chart(fig, use_container_width=True) 
