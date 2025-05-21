@@ -1,6 +1,5 @@
 # Car Sales Data Explorer
 ## Web-App-Project
-## Analysis of Car Sales Data
 
 This web app allows you to explore and visualize car sales data interactively, like: 
 
