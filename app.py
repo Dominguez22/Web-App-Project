@@ -5,8 +5,8 @@ import plotly.express as px
 
 car_df = pd.read_csv('P:/DevTools/Projects/Python/Web-App-Project/vehicles_us.csv') #read csv file
 
-st.title('Car Sales Data') #app title
-st.write('--This is a web app to visualize car sales data--') #description
+st.title('Analysis of Car Sales Data') #app title
+st.write('--This web app allows you to explore and visualize data of car sales ads--') #description
 
 st.header('Search a vehicle:') #header for searching a vehicle
 
@@ -75,7 +75,7 @@ if hist_button:
                           font=dict(size=14),
                           title_font=dict(size=20),
                           bargap=0.1 #gap between bars
-     )
+         )
         st.plotly_chart(fig, use_container_width=True)
     elif hist_choice == "Distribution by Condition":
         st.write('Distribution by car condition')
@@ -123,11 +123,11 @@ st.write("Create a scatter plot to analyze relationships between car attributes.
 #options for the selectbox
 x_options = ["model_year", "odometer", "price"]
 y_options = ["price", "odometer"]
-color_options = ["condition", "fuel", "transmission", "paint_color"] 
+categorize_options = ["condition", "fuel", "transmission", "paint_color"] 
 
 x_axis = st.selectbox("Select X-axis", x_options, index=0) #select box for x-axis
 y_axis = st.selectbox("Select Y-axis", y_options, index=0) #select box for y-axis
-color_by = st.selectbox("Categorize by", color_options, index=0) #select box for "categorize by" option
+categorize_by = st.selectbox("Categorize by", categorize_options, index=0) #select box for "categorize by" option
 
 scatt_button = st.button('Create a scatter plot') #press button to show scatter plot
 
@@ -137,10 +137,10 @@ if scatt_button:
     fig = px.scatter(filtered_df,
                      x=x_axis,
                      y=y_axis,
-                     color=color_by,
+                     color=categorize_by,
                      hover_data=["odometer", "fuel", "transmission"],
                      template="plotly_white",
-                     title=f"{y_axis.title()} vs {x_axis.title()} for {selected_model} (Categorize by {color_by})"
+                     title=f"{y_axis.title()} vs {x_axis.title()} for {selected_model} (categorize by {categorize_by})"
     )
     fig.update_layout(font=dict(size=14), title_font=dict(size=20))
     st.plotly_chart(fig, use_container_width=True) 
