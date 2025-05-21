@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-car_df = pd.read_csv('P:/DevTools/Projects/Python/Web-App-Project/vehicles_us.csv') #read csv file
+car_df = pd.read_csv('vehicles_us.csv') #read csv file
 
 st.title('Car Sales Data Explorer') #app title
 st.write('---This web app allows you to explore and visualize data of car sales ads---') #description
