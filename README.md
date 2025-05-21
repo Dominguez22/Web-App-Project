@@ -1,4 +1,5 @@
-# Web-App-Project
+# Car Sales Data Explorer
+## Web-App-Project
 ## Analysis of Car Sales Data
 
 This web app allows you to explore and visualize car sales data interactively, like: 
@@ -9,7 +10,7 @@ This web app allows you to explore and visualize car sales data interactively, l
 
 ## How to Run the Web App
 
-1. Make sure you have [Streamlit](https://streamlit.io/) and the required Python libraries installed.
+1. Make sure you have [Streamlit](https://streamlit.io/) and the required python libraries installed.
 2. In your terminal, navigate to the project folder and run: `streamlit run app.py`
 3. To stop the app, press `Ctrl + C` in the terminal. 
 
